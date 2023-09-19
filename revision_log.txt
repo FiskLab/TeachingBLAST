@@ -1,0 +1,170 @@
+/////////////////////Notes////////////////////////////////////////////////////////////////////////////////
+The two most significant changes were:
+Restructuring my algorithm to only produce the overlap (____*****___****) type sequence for the non-redundant hits
+Restructuring my code to directly access variables, rather than use accessor functions. The result is a less encapsulated, 
+but faster implementation. 
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////Changes made to original code to optimize///////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Change log:
+
+Replaced as many accessors function calls with direct access of the variable. 
+
+Ave:
+Runtime Benchmarks
+Database Read In: 100 milliseconds
+Query Read In: 0 milliseconds
+Database Construction: 115 milliseconds
+Finding Hits: 9 milliseconds
+Doing Hits and Overlap: 188889 milliseconds
+	 extending hits: 353 milliseconds
+	  trimming hits: 2 milliseconds
+	  generating overlap: 188466 milliseconds
+Finding unique hits: 4 milliseconds
+Printing Data: 53 milliseconds
+Total Runtime: 189173 milliseconds
+
+Try and calcluate overlap AFTER getting the most non-redundant hits
+
+Runtime Benchmarks
+Database Read In: 97 milliseconds
+Query Read In: 0 milliseconds
+Database Construction: 87 milliseconds
+Finding Hits: 10 milliseconds
+Doing Hits and Overlap: 366 milliseconds
+	 extending hits: 362 milliseconds
+	  trimming hits: 0 milliseconds
+	  generating overlap: 80 milliseconds
+Finding unique hits: 2 milliseconds
+Printing Data: 135 milliseconds
+Total Runtime: 700 milliseconds
+
+Remove erroneous testing artifacts:
+
+Runtime Benchmarks
+Database Read In: 93 milliseconds
+Query Read In: 0 milliseconds
+Database Construction: 76 milliseconds
+Finding Hits: 7 milliseconds
+Doing Hits and Overlap: 361 milliseconds
+	 extending hits: 358 milliseconds
+	  trimming hits: 0 milliseconds
+	  generating overlap: 76 milliseconds
+Finding unique hits: 2 milliseconds
+Printing Data: 129 milliseconds
+Total Runtime: 671 milliseconds
+
+Combine final print with previous for loop
+
+Runtime Benchmarks
+Database Read In: 91 milliseconds
+Query Read In: 0 milliseconds
+Database Construction: 76 milliseconds
+Finding Hits: 8 milliseconds
+Doing Hits and Overlap: 360 milliseconds
+	 extending hits: 357 milliseconds
+	  trimming hits: 0 milliseconds
+	  generating overlap: 77 milliseconds
+Finding unique hits&&Printing Data: 132 milliseconds
+Total Runtime: 669 milliseconds
+
+Reuse variables when possible (instead of declaring a new one)
+Ex: use the same var for buffered reader set to a new instance of it.
+
+Runtime Benchmarks
+Database Read In: 90 milliseconds
+Query Read In: 0 milliseconds
+Database Construction: 75 milliseconds
+Finding Hits: 8 milliseconds
+Doing Hits and Overlap: 356 milliseconds
+	 extending hits: 353 milliseconds
+	  trimming hits: 0 milliseconds
+	  generating overlap: 78 milliseconds
+Finding unique hits&&print data: 133 milliseconds
+
+Total Runtime: 664 milliseconds
+
+Move timing function for extending to encompass the call to do extendHit
+
+Runtime Benchmarks
+Database Read In: 91 milliseconds
+Query Read In: 0 milliseconds
+Database Construction: 75 milliseconds
+Finding Hits: 8 milliseconds
+Doing Hits and Overlap: 352 milliseconds
+	 extending hits: 349 milliseconds
+	  trimming hits: 0 milliseconds
+	  generating overlap: 78 milliseconds
+Finding unique hits: 136 milliseconds
+Printing Data: 0 milliseconds
+Total Runtime: 665 milliseconds
+
+
+
+/////////////////////////////////////ORIGINAL DATA////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
+
+Benchmarking Original:
+
+Runtime Benchmarks
+Database Read In: 92 milliseconds
+Query Read In: 0 milliseconds
+Database Construction: 91 milliseconds
+Finding Hits: 8 milliseconds
+Doing Hits and Overlap: 194232 milliseconds
+	 extending hits: 358 milliseconds
+	  trimming hits: 2 milliseconds
+	  generating overlap: 193799 milliseconds
+Finding unique hits: 3 milliseconds
+Printing Data: 51 milliseconds
+Total Runtime: 194480 milliseconds
+
+Runtime Benchmarks
+Database Read In: 94 milliseconds
+Query Read In: 0 milliseconds
+Database Construction: 88 milliseconds
+Finding Hits: 8 milliseconds
+Doing Hits and Overlap: 189249 milliseconds
+	 extending hits: 365 milliseconds
+	  trimming hits: 2 milliseconds
+	  generating overlap: 188814 milliseconds
+Finding unique hits: 3 milliseconds
+Printing Data: 52 milliseconds
+Total Runtime: 189497 milliseconds
+
+Runtime Benchmarks
+Database Read In: 91 milliseconds
+Query Read In: 0 milliseconds
+Database Construction: 88 milliseconds
+Finding Hits: 9 milliseconds
+Doing Hits and Overlap: 189913 milliseconds
+	 extending hits: 362 milliseconds
+	  trimming hits: 2 milliseconds
+	  generating overlap: 189479 milliseconds
+Finding unique hits: 3 milliseconds
+Printing Data: 57 milliseconds
+Total Runtime: 190164 milliseconds
+
+Ave:
+Runtime Benchmarks
+Database Read In: 90.33 milliseconds
+Query Read In: 0 milliseconds
+Database Construction: 87.3 milliseconds
+Finding Hits: 8.33 milliseconds
+Doing Hits and Overlap: 191214 milliseconds
+	 extending hits: 362 milliseconds
+	  trimming hits: 2 milliseconds
+	  generating overlap: 189479 milliseconds
+Finding unique hits: 3 milliseconds
+Printing Data: 54.3 milliseconds
+Total Runtime: 191380.33 milliseconds
+
+
+
+
+
